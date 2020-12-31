@@ -62,6 +62,17 @@ impl<T, E> Functor for Result<T, E> {
     }
 }
 
+pub trait Applicative: Functor {
+    fn pure(a: Self::Inner) -> Self::Wrapped<Self::Inner>;
+    // fn apply<B, Self::Wrapped<F: FnOnce()>>(self, fa: Self::Wrapped<Self::Inner>) -> Self::Wrapped<B>;
+}
+
+impl<A> Applicative for Option<A> {
+    fn pure(val: Self::Inner) -> Self::Wrapped<A> {
+        Some(val)
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
@@ -101,5 +112,10 @@ mod tests {
     fn functor_option_some() {
         let some = Some(2);
         assert_eq!(some.fmap(|val| val * 2), Some(4));
+    }
+
+    #[test]
+    fn applicative_pure() {
+        assert_eq!(<Option<u32> as Applicative>::pure(20), Some(20));
     }
 }
