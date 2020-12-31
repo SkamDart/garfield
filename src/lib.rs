@@ -11,15 +11,23 @@ pub fn id<T>(t: T) -> T {
     t
 }
 
-/// Semigroup
+/// A set with an associative operation is a [`Semigroup`].
 ///
 /// The class of semigroups (types with an associative binary operation).
 ///     Instances should satisfy the following:
 ///
-/// Associativity
-///     x <> (y <> z) = (x <> y) <> z
+/// - Associativity
+///
+/// ```no_compile
+/// x.concat(y.concat(z)) = z.concat(x.concat(y))
+/// ```
 pub trait Semigroup {
-    fn concat<T>(&self, other: T) -> T;
+    fn concat<T>(self, other: T) -> T;
+}
+
+/// Monoid extends the power of [`Semigroup`] by providing an identity element or "empty" value.
+pub trait Monoid: Semigroup {
+    type Empty;
 }
 
 /// Functor
