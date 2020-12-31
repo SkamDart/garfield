@@ -5,7 +5,7 @@ let
 in
 with nixpkgs;
 stdenv.mkDerivation {
-  name = "catz";
+  name = "garfield";
   buildInputs = [ crust ];
   RUST_SRC_PATH = "${crust}/lib/rustlib/src/rust/src";
 }
