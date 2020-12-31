@@ -50,6 +50,18 @@ impl<A> Functor for Option<A> {
     }
 }
 
+impl<T, E> Functor for Result<T, E> {
+    type Inner = T;
+    type Wrapped<U> = Result<U, E>;
+
+    fn fmap<B, F: FnOnce(Self::Inner) -> B>(self, f: F) -> Self::Wrapped<B> {
+        match self {
+            Err(e) => Err(e),
+            Ok(a) => Ok(f(a)),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
