@@ -32,9 +32,12 @@ pub trait Monoid: Semigroup {
 
 /// Functor
 pub trait Functor {
+    /// Alias for the type that we are generic over.
     type Inner;
+    /// The type we are generic over and it's container.
     type Wrapped<T>: Functor;
 
+    /// Lifts a function into the Functor context.
     fn fmap<B, F: FnOnce(Self::Inner) -> B>(self, f: F) -> Self::Wrapped<B>;
 }
 
