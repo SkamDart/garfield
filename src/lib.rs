@@ -22,11 +22,16 @@ pub fn id<T>(t: T) -> T {
 /// x.concat(y.concat(z)) = z.concat(x.concat(y))
 /// ```
 pub trait Semigroup {
+    /// An associative operation.
+    ///
+    /// In Haskell speak this translates to,
+    /// concat :: a -> a
     fn concat<T>(self, other: T) -> T;
 }
 
 /// Monoid extends the power of [`Semigroup`] by providing an identity element or "empty" value.
 pub trait Monoid: Semigroup {
+    /// The identity element associated with an associative operation.
     type Empty;
 }
 
@@ -38,6 +43,9 @@ pub trait Functor {
     type Wrapped<T>: Functor;
 
     /// Lifts a function into the Functor context.
+    ///
+    /// In Haskell speak this translates to,
+    /// fmap :: a -> b -> f a -> f b
     fn fmap<B, F: FnOnce(Self::Inner) -> B>(self, f: F) -> Self::Wrapped<B>;
 }
 
@@ -65,7 +73,14 @@ impl<T, E> Functor for Result<T, E> {
     }
 }
 
+/// A functor with application, providing operations to
+/// - Embed pure expressions using [`pure`]
+/// - Sequence computations and combine their results using [`apply`]
 pub trait Applicative: Functor {
+    /// Lift a value into a functor
+    ///
+    /// In Haskell speak this translates to,
+    /// pure :: (Functor f) => a -> f a
     fn pure(a: Self::Inner) -> Self::Wrapped<Self::Inner>;
     // fn apply<B, Self::Wrapped<F: FnOnce()>>(self, fa: Self::Wrapped<Self::Inner>) -> Self::Wrapped<B>;
 }
