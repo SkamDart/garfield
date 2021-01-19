@@ -6,6 +6,6 @@ in
 with nixpkgs;
 stdenv.mkDerivation {
   name = "garfield";
-  buildInputs = [ crust ];
+  buildInputs = [ crust clippy ];
   RUST_SRC_PATH = "${crust}/lib/rustlib/src/rust/src";
 }
