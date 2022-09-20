@@ -4,6 +4,7 @@
 #![allow(incomplete_features)]
 #![warn(clippy::all, clippy::pedantic)]
 
+pub mod alternative;
 pub mod applicative;
 pub mod functor;
 pub mod monoid;
