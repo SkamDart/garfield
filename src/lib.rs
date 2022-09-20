@@ -1,12 +1,8 @@
 //! # Garfield
 //!
 //! Your guide to Category Theory concepts in Rust using [Generic Associated Types]().
-#![feature(generic_associated_types)]
 #![allow(incomplete_features)]
- #![warn(
-     clippy::all,
-     clippy::pedantic,
- )]
+#![warn(clippy::all, clippy::pedantic)]
 
 pub mod applicative;
 pub mod functor;
