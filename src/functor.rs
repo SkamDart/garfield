@@ -44,26 +44,30 @@ impl<T, E> Functor for Result<T, E> {
     }
 }
 
+pub fn rmap<F, B>(f: impl FnOnce(F::Inner) -> B, fa: F::Wrapped<F::Inner>) -> F::Wrapped<B>
+where
+    F: Functor,
+{
+    <F as Functor>::fmap(f, fa)
+}
+
 #[cfg(test)]
 mod test {
-    use super::Functor;
+    use super::rmap;
     use crate::id;
 
     #[test]
     fn functor_option_identity() {
-        assert_eq!(Option::<i32>::fmap(id, Some(2)), Some(2));
+        assert_eq!(rmap::<Option<i32>, _>(id, Some(2)), Some(2));
     }
 
     #[test]
     fn functor_option_none() {
-        // need to help out type inference here.
-        let none: Option<u32> = None;
-        assert_eq!(Option::<u32>::fmap(|x| x * 2, none), None);
+        assert_eq!(rmap::<Option<i32>, _>(|x| x * 2, None), None);
     }
 
     #[test]
     fn functor_option_some() {
-        let some = Some(2);
-        assert_eq!(Option::<u32>::fmap(|val| val * 2, some), Some(4));
+        assert_eq!(rmap::<Option<i32>, i32>(|val| val * 2, Some(2)), Some(4));
     }
 }
