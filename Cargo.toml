@@ -3,6 +3,5 @@ authors = ["Cameron Dart <cdart@anduril.com>"]
 edition = "2018"
 name = "garfield"
 version = "0.1.0"
-
-[dev-dependencies]
-quickcheck = "*"
+license = "MIT"
+keywords = [ "matematics" ]
