@@ -1,8 +1,5 @@
 [package]
-authors = ["Cameron Dart <cdart@anduril.com>"]
+authors = ["Cameron Dart <cdart2@illinois.edu>"]
 edition = "2018"
 name = "garfield"
 version = "0.1.0"
-
-[dev-dependencies]
-quickcheck = "*"
