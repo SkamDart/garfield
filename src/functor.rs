@@ -3,14 +3,29 @@
 //! A functor is a type that implements a function `rmap` that sastifies the following laws.
 //!
 //! Identity
-//!
-//!     rmap(identity, x) == identity(x)
-//!
+//! ```compile_fail
+//! map(identity, x) == identity(x)
+//! ```
 //! Composition
+//! ```compile_fail
+//! rmap(rmap(x, y), z) == rmap(x, rmap(y, z))
+//! ```
+//! Examples:
 //!
-//!     rmap(rmap(x, y), z) == rmap(x, rmap(y, z))
+//! ```rust
+//! use garfield::fmap;
 //!
-
+//! assert_eq!(fmap(|v| v * 2, Some(2)), Some(4));
+//!
+//! // ok type inference is a little ugly here.
+//! assert_eq!(fmap(|v| v * 2, Ok::<u8, ()>(2)), Ok(4));
+//! ```
+//!
+//! ## Caveat
+//! Yes, this already exists in the Rust std library but it goes by many different names
+//! and it is an associated method on it's implementing type.
+//!
+//! For example, we have [`Option::map`], [`Result::map`], and [`Iterator::map`].
 pub trait Functor {
     /// Alias for the type that we are generic over.
     type Inner;

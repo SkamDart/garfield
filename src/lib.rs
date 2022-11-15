@@ -65,7 +65,10 @@ pub mod semigroup;
 pub use {
     alternative::Alternative,
     applicative::Applicative,
-    functor::Functor,
+    functor::{
+        fmap,
+        Functor
+    },
     monad::Monad,
     semigroup::Semigroup,
 };
