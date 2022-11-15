@@ -58,13 +58,9 @@
 
 /// A monoid on applicative functors
 pub mod alternative;
-/// A functor that can embed pure expressions and sequence computation
 pub mod applicative;
-/// A mapping between categories
 pub mod functor;
-/// Definitely not a burrito
 pub mod monad;
-/// Types with an associative binary operation.
 pub mod semigroup;
 pub use {
     alternative::Alternative,

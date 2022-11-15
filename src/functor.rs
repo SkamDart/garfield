@@ -1,14 +1,23 @@
-/// Functor
-pub trait Functor: Sized {
+//! A mapping between categories
+//!
+//! A functor is a type that implements a function `rmap` that sastifies the following laws.
+//!
+//! Identity
+//!
+//!     rmap(identity, x) == identity(x)
+//!
+//! Composition
+//!
+//!     rmap(rmap(x, y), z) == rmap(x, rmap(y, z))
+//!
+
+pub trait Functor {
     /// Alias for the type that we are generic over.
     type Inner;
     /// The type we are generic over and it's container.
     type Wrapped<T>: Functor;
 
-    /// Lifts a function into the Functor context.
-    ///
-    /// In Haskell speak this translates to,
-    /// fmap :: a -> b -> f a -> f b
+    /// Lift a function into the Functor context.
     fn rmap<B, F>(self, f: F) -> Self::Wrapped<B>
     where
         F: FnOnce(Self::Inner) -> B;

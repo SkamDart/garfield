@@ -1,3 +1,4 @@
+//! Definitely not a burrito
 use crate::applicative::Applicative;
 
 pub trait Monad: Applicative {
