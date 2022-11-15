@@ -1,3 +1,4 @@
+//! A functor that can embed pure expressions and sequence computation
 use crate::functor::Functor;
 
 /// A functor with application, providing operations to

@@ -1,13 +1,15 @@
-/// A set with an associative operation is a [`Semigroup`].
-///
-/// The class of semigroups (types with an associative binary operation).
-///     Instances should satisfy the following:
-///
-/// - Associativity
-///
-/// ```no_compile
-/// x.rconcat(y.rconcat(z)) = z.rconcat(x.rconcat(y))
-/// ```
+//! Types with an associative binary operation.
+//!
+//! A set with an associative operation is a [`Semigroup`].
+//!
+//! The class of semigroups (types with an associative binary operation).
+//!     Instances should satisfy the following:
+//!
+//! - Associativity
+//!
+//! ```no_compile
+//! x.rconcat(y.rconcat(z)) = z.rconcat(x.rconcat(y))
+//! ```
 pub trait Semigroup {
     /// An associative operation.
     ///
